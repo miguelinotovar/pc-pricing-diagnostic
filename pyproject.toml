@@ -1,0 +1,8 @@
+[project]
+name = "pc-pricing-diagnostic"
+version = "0.1.0"
+description = "Sample P&C pricing diagnostic using claim frequency, exposure, segmentation, and model validation."
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
