@@ -1,0 +1,5 @@
+model,sample,records,exposure,observed_claims,predicted_claims,observed_frequency,predicted_frequency,poisson_deviance,mean_poisson_deviance,train_aic
+null_offset_only,train,20000,11018.78,924,924.0,0.083857,0.083857,5567.599465,0.27838,7381.555812
+null_offset_only,test,5000,2732.69,234,229.155168,0.08563,0.083857,1415.189055,0.283038,7381.555812
+benchmark_frequency_glm,train,20000,11018.78,924,924.0,0.083857,0.083857,5349.020485,0.267451,7186.976832
+benchmark_frequency_glm,test,5000,2732.69,234,233.553935,0.08563,0.085467,1371.95584,0.274391,7186.976832

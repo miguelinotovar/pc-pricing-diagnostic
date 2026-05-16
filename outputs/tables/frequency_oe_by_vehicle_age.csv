@@ -1,0 +1,17 @@
+vehicle_type,vehicle_age_band,records,policies,exposure,observed_claims,expected_claims,observed_frequency,expected_frequency,oe_ratio,claim_difference,credibility_flag,diagnostic_note,suggested_review
+Sports,13+,346,346,186.46,45,36.22,0.241332,0.194236,1.242468,8.78,Reviewable,Observed claims exceed model expectation,"Review pricing relativities, underwriting rules, and possible missing interactions"
+SUV,8-12,2102,2102,1134.21,109,94.22,0.096102,0.08307,1.156882,14.78,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sports,0-3,273,273,147.56,19,17.25,0.128759,0.116879,1.101647,1.75,Low claim count,Monitor,No immediate action; include in recurring monitoring
+Sedan,4-7,3021,3021,1642.64,119,112.04,0.072444,0.068206,1.062143,6.96,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Truck,8-12,943,943,524.55,55,51.8,0.104852,0.098747,1.061824,3.2,Reviewable,Monitor,No immediate action; include in recurring monitoring
+SUV,0-3,1722,1722,940.91,60,57.28,0.063768,0.060872,1.047576,2.72,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sedan,0-3,2532,2532,1411.26,82,80.48,0.058104,0.057026,1.018914,1.52,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sedan,13+,3292,3292,1823.94,174,173.1,0.095398,0.094904,1.005207,0.9,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sports,4-7,327,327,181.8,24,24.27,0.132014,0.133485,0.988977,-0.27,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Truck,13+,1029,1029,558.24,67,68.4,0.12002,0.122531,0.979502,-1.4,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Truck,4-7,938,938,518.29,44,45.88,0.084894,0.08852,0.959037,-1.88,Reviewable,Monitor,No immediate action; include in recurring monitoring
+SUV,4-7,1980,1980,1097.21,75,78.91,0.068355,0.07192,0.950436,-3.91,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Truck,0-3,836,836,459.38,32,33.91,0.069659,0.073819,0.943654,-1.91,Reviewable,Monitor,No immediate action; include in recurring monitoring
+SUV,13+,2252,2252,1243.6,114,123.61,0.091669,0.099397,0.922257,-9.61,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sedan,8-12,3131,3131,1727.58,119,136.32,0.068882,0.078909,0.872933,-17.32,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Sports,8-12,276,276,153.83,20,23.88,0.130013,0.155239,0.8375,-3.88,Reviewable,Monitor,No immediate action; include in recurring monitoring

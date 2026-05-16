@@ -1,0 +1,17 @@
+territory,vehicle_type,records,policies,exposure,observed_claims,expected_claims,observed_frequency,expected_frequency,oe_ratio,claim_difference,credibility_flag,diagnostic_note,suggested_review
+Rural,Sports,259,259,146.6,17,12.62,0.11596,0.086083,1.347071,4.38,Low claim count,High O/E but limited credibility,Avoid direct repricing; monitor or aggregate with related segments
+Rural,Sedan,2423,2423,1312.83,66,57.22,0.050273,0.043583,1.153492,8.78,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,Sports,366,366,205.57,32,29.32,0.155664,0.142629,1.091392,2.68,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,Truck,924,924,517.04,56,51.65,0.108308,0.099891,1.084256,4.35,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,SUV,1988,1988,1081.94,98,91.1,0.090578,0.084198,1.075774,6.9,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,SUV,2051,2051,1120.54,128,126.21,0.114231,0.11263,1.014215,1.79,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,Truck,1213,1213,667.55,60,59.24,0.089881,0.088748,1.012761,0.76,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,Sports,295,295,159.96,35,34.72,0.218806,0.217056,1.00806,0.28,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,Sedan,3645,3645,2033.35,138,140.26,0.067868,0.068982,0.983862,-2.26,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,Truck,905,905,482.14,65,66.79,0.134816,0.138529,0.973201,-1.79,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Rural,SUV,1587,1587,883.41,40,41.4,0.045279,0.046863,0.966203,-1.4,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,Sedan,2971,2971,1644.1,169,175.08,0.102792,0.106489,0.965286,-6.08,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,SUV,2430,2430,1330.04,92,95.31,0.069171,0.071661,0.965246,-3.31,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,Sports,302,302,157.52,24,24.95,0.152357,0.158406,0.961819,-0.95,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,Sedan,2937,2937,1615.15,121,129.38,0.074916,0.080103,0.935249,-8.38,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Rural,Truck,704,704,393.73,17,22.31,0.043177,0.056657,0.76207,-5.31,Low claim count,Monitor,No immediate action; include in recurring monitoring

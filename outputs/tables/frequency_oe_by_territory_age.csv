@@ -1,0 +1,17 @@
+territory,driver_age_band,records,policies,exposure,observed_claims,expected_claims,observed_frequency,expected_frequency,oe_ratio,claim_difference,credibility_flag,diagnostic_note,suggested_review
+Rural,25-39,1294,1294,720.8,38,34.11,0.052719,0.047321,1.114078,3.89,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,25-39,2085,2085,1157.09,94,85.05,0.081238,0.073506,1.105182,8.95,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Rural,40-64,2540,2540,1394.39,60,54.41,0.04303,0.039022,1.102698,5.59,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Rural,65+,748,748,410.08,28,25.86,0.068279,0.063055,1.082849,2.14,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,40-64,3128,3128,1718.0,128,120.09,0.074505,0.069902,1.065859,7.91,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,65+,978,978,544.08,87,82.03,0.159902,0.150762,1.060624,4.97,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,16-24,448,448,249.49,44,41.52,0.176359,0.166405,1.059816,2.48,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,16-24,492,492,268.22,64,60.39,0.238608,0.225147,1.059791,3.61,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,65+,1147,1147,628.63,64,62.34,0.101809,0.099165,1.026663,1.66,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,25-39,1622,1622,886.96,78,76.64,0.08794,0.086403,1.017793,1.36,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,25-39,1623,1623,890.61,102,100.31,0.114528,0.11263,1.01685,1.69,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,40-64,3811,3811,2111.98,122,126.77,0.057766,0.060025,0.962365,-4.77,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban A,40-64,3129,3129,1703.82,144,160.07,0.084516,0.093946,0.899621,-16.07,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Suburban,16-24,611,611,338.81,42,49.98,0.123965,0.147511,0.840375,-7.98,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Urban B,65+,953,953,517.2,49,58.83,0.094741,0.11375,0.832886,-9.83,Reviewable,Monitor,No immediate action; include in recurring monitoring
+Rural,16-24,391,391,211.31,14,19.17,0.066254,0.090701,0.730471,-5.17,Low claim count,Monitor,No immediate action; include in recurring monitoring
