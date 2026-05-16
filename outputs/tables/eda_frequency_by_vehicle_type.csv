@@ -1,0 +1,5 @@
+vehicle_type,records,policies,exposure,claims,total_claim_amount,earned_premium,observed_frequency,average_claim_size,pure_premium,premium_per_exposure,loss_ratio,frequency_index,loss_ratio_index,credibility_flag
+Sedan,11976,11976,6605.42,494,1503486.28,5646614.06,0.074787,3043.49,227.61,854.85,0.266263,0.88811,0.910951,Reviewable
+SUV,8056,8056,4415.93,358,1022298.65,3790081.85,0.08107,2855.58,231.5,858.27,0.26973,0.962723,0.922811,Reviewable
+Truck,3746,3746,2060.46,198,668270.5,2027698.48,0.096095,3375.1,324.33,984.1,0.329571,1.141146,1.127541,Reviewable
+Sports,1222,1222,669.66,108,397773.05,824114.6,0.161277,3683.08,594.0,1230.65,0.482667,1.915192,1.65132,Reviewable

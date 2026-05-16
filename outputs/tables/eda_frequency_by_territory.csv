@@ -1,0 +1,5 @@
+territory,records,policies,exposure,claims,total_claim_amount,earned_premium,observed_frequency,average_claim_size,pure_premium,premium_per_exposure,loss_ratio,frequency_index,loss_ratio_index,credibility_flag
+Rural,4973,4973,2736.58,140,402441.85,2252591.3,0.051159,2874.58,147.06,823.14,0.178657,0.607521,0.61123,Reviewable
+Suburban,7654,7654,4236.51,322,978348.66,3491373.58,0.076006,3038.35,230.93,824.12,0.280219,0.902586,0.958696,Reviewable
+Urban B,6151,6151,3371.66,299,930122.22,3044433.06,0.08868,3110.78,275.87,902.95,0.305516,1.053098,1.045243,Reviewable
+Urban A,6222,6222,3406.73,397,1280915.75,3500111.05,0.116534,3226.49,376.0,1027.41,0.365964,1.383863,1.252052,Reviewable

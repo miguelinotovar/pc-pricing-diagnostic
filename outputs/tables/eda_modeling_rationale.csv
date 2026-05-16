@@ -1,0 +1,5 @@
+variable,raw_type,eda_question,benchmark_treatment,rationale
+territory,nominal category,Does claim frequency differ materially by geographic segment?,categorical,Territory is nominal rather than ordinal. Treatment coding gives interpretable relativities against a reference territory.
+vehicle_type,nominal category,Does claim frequency differ by vehicle class?,categorical,"Vehicle type is nominal. Polynomial contrasts are not appropriate because there is no natural ordering across Sedan, SUV, Truck, and Sports."
+driver_age,numeric,Is the age-frequency relationship approximately log-linear?,age bands,"Driver age is available as a raw numeric variable, but frequency can be nonlinear across ages. Age bands provide a transparent first benchmark; continuous or spline specifications can be compared later."
+vehicle_age,numeric,Is vehicle age approximately log-linear or better grouped?,age bands,"Vehicle age is numeric, but banding improves interpretability and stability for a first diagnostic model. A later model can compare continuous or spline-based specifications."
