@@ -1,0 +1,12 @@
+metric,value
+records,25000.0
+distinct_policies,25000.0
+total_exposure,13751.4731
+total_claims,1158.0
+observed_frequency,0.084209
+total_claim_amount,3591828.48
+total_earned_premium,12288508.99
+loss_ratio,0.292292
+pure_premium,261.195906
+premium_per_exposure,893.614008
+average_claim_size,3101.75171
