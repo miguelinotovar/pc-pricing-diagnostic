@@ -15,8 +15,11 @@ OUTPUT_EXCEL = ROOT / "outputs" / "excel"
 
 
 MODEL_FORMULA = (
-    "claim_count ~ C(territory) + C(driver_age_band) "
-    "+ C(vehicle_age_band) + C(vehicle_type)"
+    'claim_count ~ '
+    'C(territory, Treatment(reference="Rural")) + '
+    'C(driver_age_band, Treatment(reference="40-64")) + '
+    'C(vehicle_age_band, Treatment(reference="4-7")) + '
+    'C(vehicle_type, Treatment(reference="Sedan"))'
 )
 
 NULL_FORMULA = "claim_count ~ 1"
@@ -84,8 +87,22 @@ def fit_poisson_glm(formula: str, df: pd.DataFrame):
     """
     Fit a Poisson GLM with log(exposure) as an offset.
 
-    The offset means the model estimates annual claim frequency while the response
-    remains the observed claim count for the policy-period.
+    The response is the observed claim count for each policy-period. The offset
+    enters the linear predictor with a fixed coefficient of 1, so exposure is treated
+    as a known pro-rata temporis volume measure rather than as a risk covariate to
+    be estimated.
+
+    With a log link, the model is:
+
+        log(E[N_i]) = log(exposure_i) + x_i' beta
+
+    equivalently:
+
+        E[N_i] = exposure_i * exp(x_i' beta)
+
+    Therefore, exp(x_i' beta) is interpreted as the expected claim frequency per
+    unit of exposure, while E[N_i] remains the expected claim count for the observed
+    policy-period.
     """
     offset = np.log(df["exposure"])
 
@@ -99,31 +116,47 @@ def fit_poisson_glm(formula: str, df: pd.DataFrame):
     return model.fit()
 
 
-def predict_expected_claims(result, df: pd.DataFrame) -> np.ndarray:
+def compute_expected_claims(fitted_model, df: pd.DataFrame) -> np.ndarray:
     """
-    Predict expected claim counts for each policy-period.
+    Compute expected claim counts for each policy-period.
+
+    The fitted GLM returns the conditional mean mu_hat_i for each record:
+
+        mu_hat_i = exposure_i * exp(x_i' beta_hat)
     """
     offset = np.log(df["exposure"])
-    predictions = result.predict(df, offset=offset)
+    expected_claims = fitted_model.predict(df, offset=offset)
 
-    return np.asarray(predictions).clip(min=1e-12)
+    return np.asarray(expected_claims).clip(min=1e-12)
 
 
-def poisson_deviance(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+def poisson_deviance(
+    observed_counts: np.ndarray,
+    expected_counts: np.ndarray,
+) -> float:
     """
     Compute Poisson deviance.
 
-    Lower deviance indicates better fit. This is the natural diagnostic scale for
-    Poisson frequency models.
+    observed_counts contains the observed claim counts N_i.
+    expected_counts contains the fitted conditional means mu_hat_i.
+
+    The function computes:
+
+        2 * sum_i [N_i log(N_i / mu_hat_i) - N_i + mu_hat_i]
+
+    with the convention that N_i log(N_i / mu_hat_i) is zero when N_i = 0.
     """
-    y_true = np.asarray(y_true, dtype=float)
-    y_pred = np.asarray(y_pred, dtype=float).clip(min=1e-12)
+    observed_counts = np.asarray(observed_counts, dtype=float)
+    expected_counts = np.asarray(expected_counts, dtype=float).clip(min=1e-12)
 
-    term = np.zeros_like(y_true, dtype=float)
+    term = np.zeros_like(observed_counts, dtype=float)
 
-    positive = y_true > 0
-    term[positive] = y_true[positive] * np.log(y_true[positive] / y_pred[positive])
-    term -= y_true - y_pred
+    positive = observed_counts > 0
+    term[positive] = observed_counts[positive] * np.log(
+        observed_counts[positive] / expected_counts[positive]
+    )
+
+    term -= observed_counts - expected_counts
 
     return float(2 * term.sum())
 
@@ -138,17 +171,17 @@ def create_model_comparison(
     """
     rows = []
 
-    for model_name, result in fitted_models.items():
+    for model_name, fitted_model in fitted_models.items():
         for sample_name, sample_df in {"train": train, "test": test}.items():
-            expected_claims = predict_expected_claims(result, sample_df)
+            expected_claims = compute_expected_claims(fitted_model, sample_df)
 
             observed_claims = sample_df["claim_count"].sum()
             exposure = sample_df["exposure"].sum()
-            predicted_claims = expected_claims.sum()
+            total_expected_claims = expected_claims.sum()
 
             deviance = poisson_deviance(
-                sample_df["claim_count"].to_numpy(),
-                expected_claims,
+                observed_counts=sample_df["claim_count"].to_numpy(),
+                expected_counts=expected_claims,
             )
 
             rows.append(
@@ -158,12 +191,12 @@ def create_model_comparison(
                     "records": len(sample_df),
                     "exposure": exposure,
                     "observed_claims": observed_claims,
-                    "predicted_claims": predicted_claims,
+                    "expected_claims": total_expected_claims,
                     "observed_frequency": observed_claims / exposure,
-                    "predicted_frequency": predicted_claims / exposure,
+                    "expected_frequency": total_expected_claims / exposure,
                     "poisson_deviance": deviance,
                     "mean_poisson_deviance": deviance / len(sample_df),
-                    "train_aic": result.aic,
+                    "train_aic": fitted_model.aic,
                 }
             )
 
@@ -200,14 +233,18 @@ def create_coefficient_table(result) -> pd.DataFrame:
 
 def score_policy_data(
     df: pd.DataFrame,
-    benchmark_result,
+    fitted_benchmark_model,
 ) -> pd.DataFrame:
     """
-    Add model-predicted expected claims to policy-period data.
+    Add benchmark GLM expected claim counts and expected frequencies to each
+    policy-period record.
+
+    expected_claims_benchmark is the fitted conditional mean for the claim count.
+    expected_frequency_benchmark is that expected count divided by exposure.
     """
     scored = df.copy()
-    scored["expected_claims_benchmark"] = predict_expected_claims(
-        benchmark_result,
+    scored["expected_claims_benchmark"] = compute_expected_claims(
+        fitted_benchmark_model,
         scored,
     )
     scored["expected_frequency_benchmark"] = (
@@ -328,8 +365,6 @@ def round_numeric_outputs(df: pd.DataFrame) -> pd.DataFrame:
         "relativity",
         "relativity_ci_lower",
         "relativity_ci_upper",
-        "predicted_claims",
-        "predicted_frequency",
         "poisson_deviance",
         "mean_poisson_deviance",
         "train_aic",
@@ -351,6 +386,9 @@ def round_numeric_outputs(df: pd.DataFrame) -> pd.DataFrame:
 def write_outputs(outputs: dict[str, pd.DataFrame]) -> None:
     """
     Write frequency model outputs to CSV and Excel.
+
+    CSV exports are written for every table in outputs. The Excel workbook uses
+    an explicit sheet map so the client-facing workbook has stable sheet names.
     """
     OUTPUT_TABLES.mkdir(parents=True, exist_ok=True)
     OUTPUT_EXCEL.mkdir(parents=True, exist_ok=True)
@@ -358,34 +396,30 @@ def write_outputs(outputs: dict[str, pd.DataFrame]) -> None:
     for name, table in outputs.items():
         table.to_csv(OUTPUT_TABLES / f"{name}.csv", index=False)
 
+    excel_sheets = {
+        "frequency_model_comparison": "model_comparison",
+        "frequency_model_coefficients": "coefficients",
+        "frequency_oe_by_territory_age": "oe_territory_age",
+        "frequency_oe_by_territory_vehicle": "oe_territory_vehicle",
+        "frequency_oe_by_vehicle_age": "oe_vehicle_age",
+    }
+
+    missing_outputs = set(excel_sheets).difference(outputs)
+
+    if missing_outputs:
+        raise KeyError(
+            f"Missing required output tables for Excel export: {sorted(missing_outputs)}"
+        )
+
     excel_path = OUTPUT_EXCEL / "frequency_model_review.xlsx"
 
     with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
-        outputs["frequency_model_comparison"].to_excel(
-            writer,
-            sheet_name="model_comparison",
-            index=False,
-        )
-        outputs["frequency_model_coefficients"].to_excel(
-            writer,
-            sheet_name="coefficients",
-            index=False,
-        )
-        outputs["frequency_oe_by_territory_age"].to_excel(
-            writer,
-            sheet_name="oe_territory_age",
-            index=False,
-        )
-        outputs["frequency_oe_by_territory_vehicle"].to_excel(
-            writer,
-            sheet_name="oe_territory_vehicle",
-            index=False,
-        )
-        outputs["frequency_oe_by_vehicle_age"].to_excel(
-            writer,
-            sheet_name="oe_vehicle_age",
-            index=False,
-        )
+        for output_name, sheet_name in excel_sheets.items():
+            outputs[output_name].to_excel(
+                writer,
+                sheet_name=sheet_name,
+                index=False,
+            )
 
 
 def main() -> None:
