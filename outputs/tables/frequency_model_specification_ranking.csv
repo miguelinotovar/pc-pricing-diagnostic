@@ -1,0 +1,6 @@
+rank,model,parameters,exposure,observed_claims,expected_claims,total_oe_ratio,mean_poisson_deviance,deviance_lift_vs_best,train_aic
+1,categorical_age_bands,13,2732.69,234,233.55,1.00191,0.274391,0.0,7186.976832
+2,hybrid_driver_band_vehicle_quadratic,12,2732.69,234,233.63,1.001578,0.274546,0.000564,7189.791628
+3,continuous_quadratic_age,11,2732.69,234,233.67,1.001393,0.275254,0.003144,7205.583452
+4,continuous_linear_age,9,2732.69,234,231.63,1.010239,0.276905,0.009161,7259.533635
+5,null_offset_only,1,2732.69,234,229.16,1.021142,0.283038,0.031512,7381.555812

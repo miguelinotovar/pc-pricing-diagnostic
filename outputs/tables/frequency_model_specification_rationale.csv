@@ -1,0 +1,6 @@
+model,purpose,interpretation
+null_offset_only,Baseline model with exposure only,Tests whether any feature-based specification improves over using a single portfolio-level frequency.
+categorical_age_bands,Interpretable benchmark model,Uses categorical age bands and treatment coding to produce relativities that are easy to explain in a pricing review.
+continuous_linear_age,Simple continuous-age alternative,Tests whether raw driver age and vehicle age can be represented with a log-linear relationship.
+continuous_quadratic_age,Nonlinear continuous-age alternative,Allows curvature in driver age and vehicle age while keeping the specification compact.
+hybrid_driver_band_vehicle_quadratic,Hybrid actuarial specification,Keeps driver age bands for interpretability and allows a smooth nonlinear effect for vehicle age.
