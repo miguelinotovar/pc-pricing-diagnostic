@@ -1,0 +1,5 @@
+file_name,purpose,primary_audience,use_case
+executive_top_frequency_segments.png,Show segments with elevated claim frequency relative to the portfolio.,Commercial and technical,Supports pricing and underwriting prioritization discussions.
+executive_top_loss_ratio_segments.png,Show segments with elevated loss ratio relative to the portfolio.,Commercial and technical,Supports premium adequacy and profitability discussions.
+executive_calibration_by_decile.png,Show whether observed and expected frequencies align across risk deciles.,Technical and mixed audience,Supports model validation and trust in the benchmark model.
+executive_model_specification_comparison.png,Compare alternative model specifications using held-out test performance.,Technical reviewer,Supports explanation of why the benchmark specification was selected.
