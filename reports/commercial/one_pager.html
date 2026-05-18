@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P&C Pricing Diagnostic One-Pager</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="page">
+        <header class="brand-bar">
+            <div>
+                <p class="brand-name">Miguel Tovar Actuarial Analytics</p>
+                <p class="brand-subtitle">P&C Pricing Diagnostic</p>
+            </div>
+            <p class="brand-note">Synthetic sample · Commercial diagnostic preview</p>
+        </header>
+
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Sample actuarial analytics diagnostic</p>
+                <h1>P&C Pricing Diagnostic</h1>
+                <p class="hero-text">
+                    A compact review that helps insurance teams identify segments with elevated
+                    claim frequency, loss ratio pressure, calibration issues, and pricing,
+                    underwriting, or risk classification priorities before committing to a full
+                    pricing review.
+                </p>
+            </div>
+
+            <div class="hero-card">
+                <p class="card-label">Core business question</p>
+                <p>
+                    Which segments require pricing, underwriting, or data quality review, and
+                    is there enough technical support to prioritize the next action?
+                </p>
+            </div>
+        </section>
+
+        <section class="grid two-columns">
+            <div class="panel">
+                <h2>What the diagnostic reviews</h2>
+                <ul>
+                    <li>Portfolio experience by segment</li>
+                    <li>Exploratory claim frequency patterns</li>
+                    <li>Benchmark Poisson frequency GLM with exposure offset</li>
+                    <li>Observed-versus-expected diagnostics</li>
+                    <li>Calibration by expected-risk decile</li>
+                </ul>
+            </div>
+
+            <div class="panel accent">
+                <h2>What it helps decide</h2>
+                <ul>
+                    <li>Where pricing pressure may exist</li>
+                    <li>Which underwriting rules, coverage terms, or risk classifications deserve review</li>
+                    <li>Where model calibration may be weak</li>
+                    <li>Which areas should be monitored first</li>
+                    <li>Whether deeper pricing work is justified</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="grid visual-grid">
+            <div class="visual-panel">
+                <div class="section-heading">
+                    <h2>Elevated frequency segments</h2>
+                    <p>
+                        Frequency index compares each segment's observed claim frequency against
+                        the portfolio average. A value above 1.00 indicates higher frequency than
+                        the portfolio average.
+                    </p>
+                </div>
+                <img src="../../outputs/figures/executive_top_frequency_segments.png"
+                    alt="Top segments by frequency index" />
+            </div>
+
+            <div class="visual-panel">
+                <div class="section-heading">
+                    <h2>Model calibration view</h2>
+                    <p>
+                        Policies are sorted by model-expected frequency and grouped into ten
+                        equally sized risk deciles. Higher deciles should generally show higher
+                        observed frequency.
+                    </p>
+                </div>
+                <img src="../../outputs/figures/executive_calibration_by_decile.png"
+                    alt="Observed vs expected frequency by risk decile" />
+            </div>
+        </section>
+
+        <section class="grid three-columns">
+            <div class="mini-card">
+                <h3>Typical deliverables</h3>
+                <p>
+                    Executive memo, Excel review pack, segment diagnostics, model validation
+                    summary, and technical appendix if needed.
+                </p>
+            </div>
+
+            <div class="mini-card">
+                <h3>Intended users</h3>
+                <p>
+                    Pricing actuaries, pricing managers, underwriting managers, analytics teams,
+                    MGAs, program administrators, and consultants.
+                </p>
+            </div>
+
+            <div class="mini-card strong">
+                <h3>Suggested next step</h3>
+                <p>
+                    Review one book, program, territory cluster, or segment group and identify
+                    3–5 pricing or underwriting priorities.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                Synthetic sample only. Not a final rate indication, rate filing, or substitute
+                for actuarial judgment. A production review requires validation of real policy,
+                premium, exposure, claim, underwriting, and business-rule data.
+            </p>
+        </footer>
+    </main>
+</body>
+
+</html>
