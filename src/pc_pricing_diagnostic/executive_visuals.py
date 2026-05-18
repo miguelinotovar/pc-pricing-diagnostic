@@ -12,6 +12,14 @@ from pc_pricing_diagnostic.frequency_model import (
 OUTPUT_FIGURES = ROOT / "outputs" / "figures"
 EXECUTIVE_EXCEL_PATH = OUTPUT_EXCEL / "executive_visual_pack.xlsx"
 
+NAVY = "#172033"
+BLUE = "#2f5f98"
+SOFT_BLUE = "#eef5fb"
+GREEN = "#5f8f72"
+MUTED = "#5f6b7a"
+GRID = "#d9e2ec"
+BAR_BLUE = "#2f80b7"
+
 
 def load_required_table(file_name: str) -> pd.DataFrame:
     """
@@ -60,6 +68,42 @@ def prettify_model_name(model_name: str) -> str:
     return mapping.get(model_name, model_name)
 
 
+def apply_executive_axis_style(ax) -> None:
+    """
+    Apply a consistent visual style to executive charts.
+    """
+    ax.set_facecolor("white")
+    ax.grid(True, alpha=0.45, color=GRID, linewidth=0.7)
+    ax.set_axisbelow(True)
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_color(GRID)
+    ax.spines["bottom"].set_color(GRID)
+
+    ax.tick_params(axis="both", colors=NAVY, labelsize=8)
+
+    ax.xaxis.label.set_color(MUTED)
+    ax.yaxis.label.set_color(MUTED)
+    ax.xaxis.label.set_size(8)
+    ax.yaxis.label.set_size(8)
+
+
+def save_figure(fig, file_name: str) -> None:
+    """
+    Save an executive chart with consistent export settings.
+    """
+    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
+
+    fig.savefig(
+        OUTPUT_FIGURES / file_name,
+        dpi=220,
+        bbox_inches="tight",
+        facecolor="white",
+    )
+    plt.close(fig)
+
+
 def save_top_frequency_segments_chart(high_frequency_segments: pd.DataFrame) -> None:
     """
     Save a horizontal bar chart of the top segments by frequency index.
@@ -67,8 +111,6 @@ def save_top_frequency_segments_chart(high_frequency_segments: pd.DataFrame) -> 
     This is one of the most commercial charts because it highlights segments
     that may deserve pricing or underwriting review.
     """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
-
     chart_data = prepare_segment_label(high_frequency_segments)
 
     chart_data = chart_data.sort_values(
@@ -78,25 +120,37 @@ def save_top_frequency_segments_chart(high_frequency_segments: pd.DataFrame) -> 
 
     chart_data = chart_data.iloc[::-1]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
 
     ax.barh(
         chart_data["segment_label"],
         chart_data["frequency_index"],
+        color=BAR_BLUE,
+        edgecolor="none",
     )
-    ax.axvline(1.0, linewidth=1)
 
-    ax.set_title("Top Segments by Frequency Index")
-    ax.set_xlabel("Frequency index vs portfolio average")
-    ax.set_ylabel("Segment")
-    ax.grid(True, axis="x", alpha=0.3)
+    ax.axvline(1.0, color=NAVY, linewidth=1.1, alpha=0.85)
+
+    for index, value in enumerate(chart_data["frequency_index"]):
+        ax.text(
+            value + 0.035,
+            index,
+            f"{value:.2f}",
+            va="center",
+            fontsize=7.5,
+            color=NAVY,
+        )
+
+    ax.set_xlabel("Frequency index (portfolio average = 1.00)")
+    ax.set_ylabel("")
+    ax.set_xlim(0, max(chart_data["frequency_index"].max() * 1.15, 1.25))
+
+    apply_executive_axis_style(ax)
+    ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
+    ax.grid(False, axis="y")
+
     fig.tight_layout()
-
-    fig.savefig(
-        OUTPUT_FIGURES / "executive_top_frequency_segments.png",
-        dpi=150,
-    )
-    plt.close(fig)
+    save_figure(fig, "executive_top_frequency_segments.png")
 
 
 def save_top_loss_ratio_segments_chart(high_frequency_segments: pd.DataFrame) -> None:
@@ -106,8 +160,6 @@ def save_top_loss_ratio_segments_chart(high_frequency_segments: pd.DataFrame) ->
     This helps explain which segments may be commercially important from a
     premium adequacy perspective, not only a claim frequency perspective.
     """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
-
     chart_data = prepare_segment_label(high_frequency_segments)
 
     chart_data = chart_data.sort_values(
@@ -117,25 +169,37 @@ def save_top_loss_ratio_segments_chart(high_frequency_segments: pd.DataFrame) ->
 
     chart_data = chart_data.iloc[::-1]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
 
     ax.barh(
         chart_data["segment_label"],
         chart_data["loss_ratio_index"],
+        color=GREEN,
+        edgecolor="none",
     )
-    ax.axvline(1.0, linewidth=1)
 
-    ax.set_title("Top Segments by Loss Ratio Index")
-    ax.set_xlabel("Loss ratio index vs portfolio average")
-    ax.set_ylabel("Segment")
-    ax.grid(True, axis="x", alpha=0.3)
+    ax.axvline(1.0, color=NAVY, linewidth=1.1, alpha=0.85)
+
+    for index, value in enumerate(chart_data["loss_ratio_index"]):
+        ax.text(
+            value + 0.025,
+            index,
+            f"{value:.2f}",
+            va="center",
+            fontsize=7.5,
+            color=NAVY,
+        )
+
+    ax.set_xlabel("Loss ratio index (portfolio average = 1.00)")
+    ax.set_ylabel("")
+    ax.set_xlim(0, max(chart_data["loss_ratio_index"].max() * 1.15, 1.25))
+
+    apply_executive_axis_style(ax)
+    ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
+    ax.grid(False, axis="y")
+
     fig.tight_layout()
-
-    fig.savefig(
-        OUTPUT_FIGURES / "executive_top_loss_ratio_segments.png",
-        dpi=150,
-    )
-    plt.close(fig)
+    save_figure(fig, "executive_top_loss_ratio_segments.png")
 
 
 def save_calibration_chart(calibration_by_decile: pd.DataFrame) -> None:
@@ -145,74 +209,103 @@ def save_calibration_chart(calibration_by_decile: pd.DataFrame) -> None:
     This is the key model validation chart that is still understandable in a
     commercial conversation.
     """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
-
     chart_data = calibration_by_decile.sort_values("risk_decile").copy()
 
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
 
     ax.plot(
         chart_data["risk_decile"],
         chart_data["observed_frequency"],
         marker="o",
-        label="Observed frequency",
+        markersize=4.5,
+        linewidth=1.8,
+        color=BLUE,
+        label="Observed",
     )
     ax.plot(
         chart_data["risk_decile"],
         chart_data["expected_frequency"],
         marker="o",
-        label="Expected frequency",
+        markersize=4.5,
+        linewidth=1.8,
+        color=GREEN,
+        label="Expected",
     )
 
-    ax.set_title("Observed vs Expected Frequency by Risk Decile")
     ax.set_xlabel("Risk decile")
     ax.set_ylabel("Claim frequency")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    fig.tight_layout()
+    ax.set_xticks(chart_data["risk_decile"])
 
-    fig.savefig(
-        OUTPUT_FIGURES / "executive_calibration_by_decile.png",
-        dpi=150,
+    apply_executive_axis_style(ax)
+
+    legend = ax.legend(
+        loc="upper left",
+        frameon=True,
+        fontsize=8,
+        borderpad=0.4,
     )
-    plt.close(fig)
+    legend.get_frame().set_edgecolor(GRID)
+    legend.get_frame().set_facecolor("white")
+
+    fig.tight_layout()
+    save_figure(fig, "executive_calibration_by_decile.png")
 
 
 def save_model_specification_chart(
     model_specification_ranking: pd.DataFrame,
 ) -> None:
     """
-    Save a chart comparing candidate model specifications by test mean Poisson deviance.
+    Save a chart comparing candidate model specifications.
 
-    This is slightly more technical, but useful as a credibility chart when a
-    pricing manager or technical reviewer wants to see why one benchmark model
-    was preferred.
+    The chart uses deviance lift versus the best model instead of raw test mean
+    Poisson deviance, because raw deviance values may be visually too close.
     """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
+    chart_data = model_specification_ranking.copy()
 
-    chart_data = model_specification_ranking.sort_values("rank").copy()
+    if "deviance_lift_vs_best" not in chart_data.columns:
+        best_deviance = chart_data["mean_poisson_deviance"].min()
+        chart_data["deviance_lift_vs_best"] = (
+            chart_data["mean_poisson_deviance"] / best_deviance - 1
+        )
+
+    chart_data["deviance_lift_pct"] = chart_data["deviance_lift_vs_best"] * 100
     chart_data["model_label"] = chart_data["model"].map(prettify_model_name)
 
-    chart_data = chart_data.iloc[::-1]
+    chart_data = chart_data.sort_values(
+        ["deviance_lift_pct", "parameters"],
+        ascending=[False, True],
+    )
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
 
     ax.barh(
         chart_data["model_label"],
-        chart_data["mean_poisson_deviance"],
+        chart_data["deviance_lift_pct"],
+        color=BAR_BLUE,
+        edgecolor="none",
     )
 
-    ax.set_title("Model Specification Comparison")
-    ax.set_xlabel("Test mean Poisson deviance")
-    ax.set_ylabel("Model specification")
-    ax.grid(True, axis="x", alpha=0.3)
+    for index, value in enumerate(chart_data["deviance_lift_pct"]):
+        label = f"{value:.2f}%"
+        ax.text(
+            value + 0.015,
+            index,
+            label,
+            va="center",
+            fontsize=7.5,
+            color=NAVY,
+        )
+
+    ax.set_xlabel("Increase vs best test mean Poisson deviance")
+    ax.set_ylabel("")
+    ax.set_xlim(0, max(chart_data["deviance_lift_pct"].max() * 1.25, 0.25))
+
+    apply_executive_axis_style(ax)
+    ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
+    ax.grid(False, axis="y")
+
     fig.tight_layout()
-
-    fig.savefig(
-        OUTPUT_FIGURES / "executive_model_specification_comparison.png",
-        dpi=150,
-    )
-    plt.close(fig)
+    save_figure(fig, "executive_model_specification_comparison.png")
 
 
 def create_visual_inventory() -> pd.DataFrame:
