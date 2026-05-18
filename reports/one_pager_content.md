@@ -35,6 +35,8 @@ A value above 1.00 indicates higher frequency than the portfolio average.
 
 The observed-versus-expected chart compares actual claim frequency against model-expected frequency by risk decile.
 
+A risk decile groups policies into ten equally sized groups after sorting them by model-expected frequency. Decile 1 represents the lowest expected-risk policies, while decile 10 represents the highest expected-risk policies.
+
 This helps assess whether the benchmark model is directionally capturing risk differences.
 
 ![Observed vs expected frequency by risk decile](../outputs/figures/executive_calibration_by_decile.png)
