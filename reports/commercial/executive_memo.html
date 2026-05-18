@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P&C Pricing Diagnostic Executive Memo</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="page memo-page">
+        <header class="brand-bar">
+            <div>
+                <p class="brand-name">Miguel Tovar Actuarial Analytics</p>
+                <p class="brand-subtitle">P&C Pricing Diagnostic</p>
+            </div>
+            <p class="brand-note">Synthetic sample · Executive memo preview</p>
+        </header>
+
+        <section class="hero memo-hero">
+            <div>
+                <p class="eyebrow">Executive memo</p>
+                <h1>P&C Pricing Diagnostic</h1>
+                <p class="hero-text">
+                    This memo summarizes a synthetic P&C pricing diagnostic designed to help
+                    insurance teams identify pricing, underwriting, risk classification, and
+                    data quality review priorities before committing to a full pricing review.
+                </p>
+            </div>
+
+            <div class="hero-card">
+                <p class="card-label">Purpose</p>
+                <p>
+                    Translate model outputs and portfolio diagnostics into a short list of
+                    review priorities that can be discussed by pricing, underwriting, and
+                    analytics teams.
+                </p>
+            </div>
+        </section>
+
+        <section class="memo-section">
+            <h2>1. Executive summary</h2>
+            <p>
+                The diagnostic reviews claim frequency, loss ratio pressure, benchmark
+                model calibration, and observed-versus-expected claim behavior across
+                portfolio segments.
+            </p>
+            <p>
+                The objective is not to produce final rate indications. The objective is to
+                identify where deeper pricing or underwriting work is most likely to create
+                value.
+            </p>
+        </section>
+
+        <section class="grid three-columns">
+            <div class="mini-card strong">
+                <h3>Primary signal</h3>
+                <p>
+                    Segment-level frequency and loss ratio indices identify areas that may be
+                    performing worse than the portfolio average.
+                </p>
+            </div>
+
+            <div class="mini-card">
+                <h3>Model support</h3>
+                <p>
+                    A benchmark Poisson frequency GLM supports expected claim estimates and
+                    observed-versus-expected diagnostics.
+                </p>
+            </div>
+
+            <div class="mini-card">
+                <h3>Decision use</h3>
+                <p>
+                    Findings are organized into review priorities, not automatic pricing
+                    actions.
+                </p>
+            </div>
+        </section>
+
+        <section class="memo-section">
+            <h2>2. Scope reviewed</h2>
+            <div class="memo-list-grid">
+                <ul>
+                    <li>Portfolio experience by segment</li>
+                    <li>Observed claim frequency</li>
+                    <li>Loss ratio and loss ratio index</li>
+                    <li>Benchmark frequency model outputs</li>
+                </ul>
+                <ul>
+                    <li>Observed-versus-expected claims</li>
+                    <li>Calibration by expected-risk decile</li>
+                    <li>Model specification comparison</li>
+                    <li>Executive visual outputs</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="memo-section production-use">
+            <h2>How this diagnostic is used in practice</h2>
+
+            <div class="priority-grid">
+                <div>
+                    <h3>Start with one portfolio slice</h3>
+                    <p>
+                        Review one book, program, territory cluster, or segment group before
+                        expanding the workflow.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Prioritize review areas</h3>
+                    <p>
+                        Identify where pricing, underwriting, risk classification, or data quality
+                        review is most likely to matter.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Decide the next level of work</h3>
+                    <p>
+                        Determine whether deeper modeling, monitoring, or pricing action is
+                        justified.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main class="page memo-page">
+        <header class="brand-bar">
+            <div>
+                <p class="brand-name">Miguel Tovar Actuarial Analytics</p>
+                <p class="brand-subtitle">P&C Pricing Diagnostic</p>
+            </div>
+            <p class="brand-note">Key findings and next steps</p>
+        </header>
+
+        <section class="grid memo-finding-grid">
+            <div class="memo-section memo-finding-card">
+                <h2>3. Elevated frequency segments</h2>
+                <p>
+                    The frequency index compares each segment's observed claim frequency
+                    against the portfolio average. Values above 1.00 indicate higher frequency
+                    than the portfolio average.
+                </p>
+
+                <div class="memo-visual compact-visual">
+                    <img src="../../outputs/figures/executive_top_frequency_segments.png"
+                        alt="Top segments by frequency index" />
+                </div>
+            </div>
+
+            <div class="memo-section memo-finding-card">
+                <h2>4. Loss ratio pressure</h2>
+                <p>
+                    The loss ratio index compares each segment's loss ratio against the total
+                    portfolio loss ratio. Values above 1.00 indicate worse loss ratio performance
+                    than the portfolio average.
+                </p>
+
+                <div class="memo-visual compact-visual">
+                    <img src="../../outputs/figures/executive_top_loss_ratio_segments.png"
+                        alt="Top segments by loss ratio index" />
+                </div>
+            </div>
+        </section>
+
+        <section class="grid memo-lower-grid">
+            <div class="memo-section memo-validation-card">
+                <h2>5. Model validation note</h2>
+                <p>
+                    Policies are sorted by model-expected frequency and grouped into ten
+                    equally sized risk deciles. Higher deciles should generally show higher
+                    observed frequency.
+                </p>
+
+                <div class="memo-visual calibration-visual">
+                    <img src="../../outputs/figures/executive_calibration_by_decile.png"
+                        alt="Observed vs expected frequency by risk decile" />
+                </div>
+            </div>
+
+            <div class="memo-section memo-actions-card">
+                <h2>6. Recommended next steps</h2>
+                <ul>
+                    <li>Validate exposure, premium, claims, and underwriting fields.</li>
+                    <li>Review high-frequency and high-loss-ratio segments.</li>
+                    <li>Separate frequency and severity drivers.</li>
+                    <li>Identify 3–5 pricing, underwriting, or risk classification priorities.</li>
+                    <li>Decide whether deeper modeling or monitoring is justified.</li>
+                </ul>
+
+                <h2 class="limitations-heading">7. Limitations</h2>
+                <ul>
+                    <li>Synthetic sample only.</li>
+                    <li>Not a final pricing indication.</li>
+                    <li>No expense, reinsurance, capital, or regulatory treatment.</li>
+                    <li>Requires real data validation before production use.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="memo-section technical-note compact-note">
+            <h2>Interpretation note</h2>
+            <p>
+                These findings are prioritization signals. They should not be interpreted as
+                automatic rate changes without reviewing credibility, underwriting context,
+                severity contribution, data quality, and business constraints. This commercial
+                sample uses synthetic data and demonstrates workflow structure, not final
+                actuarial pricing advice.
+            </p>
+        </section>
+
+        <section class="memo-section priority-output">
+            <h2>What the diagnostic produces</h2>
+
+            <div class="priority-grid">
+                <div>
+                    <h3>Pricing review priorities</h3>
+                    <p>
+                        Segments with elevated frequency, loss ratio pressure, or observed-versus-expected
+                        deterioration.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Underwriting review priorities</h3>
+                    <p>
+                        Risk classifications, eligibility rules, coverage terms, or segment definitions
+                        that may deserve closer review.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Monitoring priorities</h3>
+                    <p>
+                        Segments, fields, or model diagnostics that should be tracked before deeper
+                        pricing work is approved.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
