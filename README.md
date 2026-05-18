@@ -36,14 +36,12 @@ pc-pricing-diagnostic/
 │   ├── figures/
 │   └── tables/
 ├── reports/
-│   ├── commercial/
-│   │   ├── executive_memo.html
-│   │   ├── one_pager.html
-│   │   ├── pc_pricing_diagnostic_executive_memo.pdf
-│   │   ├── pc_pricing_diagnostic_one_pager.pdf
-│   │   └── styles.css
-│   ├── one_pager_content.md
-│   └── sample_executive_memo.md
+│   └── commercial/
+│       ├── executive_memo.html
+│       ├── one_pager.html
+│       ├── pc_pricing_diagnostic_executive_memo.pdf
+│       ├── pc_pricing_diagnostic_one_pager.pdf
+│       └── styles.css
 ├── scripts/
 │   └── run_pipeline.py
 ├── src/
@@ -51,7 +49,6 @@ pc-pricing-diagnostic/
 ├── README.md
 ├── requirements.txt
 └── pyproject.toml
-```
 
 ## Main commercial outputs
 
