@@ -27,6 +27,12 @@ The project is not intended to produce final rate indications. It is a diagnosti
 
 ```text
 pc-pricing-diagnostic/
+├── commercial/
+│   ├── executive_memo.html
+│   ├── one_pager.html
+│   ├── pc_pricing_diagnostic_executive_memo.pdf
+│   ├── pc_pricing_diagnostic_one_pager.pdf
+│   └── styles.css
 ├── data/
 │   ├── raw/
 │   │   └── README.md
@@ -35,13 +41,6 @@ pc-pricing-diagnostic/
 │   ├── excel/
 │   ├── figures/
 │   └── tables/
-├── reports/
-│   └── commercial/
-│       ├── executive_memo.html
-│       ├── one_pager.html
-│       ├── pc_pricing_diagnostic_executive_memo.pdf
-│       ├── pc_pricing_diagnostic_one_pager.pdf
-│       └── styles.css
 ├── scripts/
 │   └── run_pipeline.py
 ├── src/
@@ -49,23 +48,24 @@ pc-pricing-diagnostic/
 ├── README.md
 ├── requirements.txt
 └── pyproject.toml
+```
 
 ## Main commercial outputs
 
 The commercial-facing sample deliverables are in:
 
 ```text
-reports/commercial/
+commercial/
 ```
 
 Key files:
 
 ```text
-reports/commercial/pc_pricing_diagnostic_one_pager.pdf
-reports/commercial/pc_pricing_diagnostic_executive_memo.pdf
-reports/commercial/one_pager.html
-reports/commercial/executive_memo.html
-reports/commercial/styles.css
+commercial/pc_pricing_diagnostic_one_pager.pdf
+commercial/pc_pricing_diagnostic_executive_memo.pdf
+commercial/one_pager.html
+commercial/executive_memo.html
+commercial/styles.css
 ```
 
 The PDFs are designed for prospect conversations. The HTML/CSS files provide reusable commercial templates for the one-pager and executive memo.
@@ -154,7 +154,7 @@ python scripts/run_pipeline.py
 
 The pipeline regenerates the synthetic data, technical outputs, model diagnostics, and executive visuals.
 
-Commercial PDFs are exported manually from the HTML files in `reports/commercial/` after visual review.
+Commercial PDFs are exported manually from the HTML files in `commercial/` after visual review.
 
 ## Key scripts
 
