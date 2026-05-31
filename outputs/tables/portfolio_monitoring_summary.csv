@@ -1,0 +1,5 @@
+warning_level,segment_count,exposure,observed_claims,expected_claims,total_claim_amount,earned_premium,average_frequency_index,average_loss_ratio_index,average_oe_ratio,max_priority_score,observed_frequency,expected_frequency,loss_ratio,total_oe_ratio
+Escalate,4,1952.41,297,284.25,934686.04,2142391.88,2.046682,1.533623,1.04927,0.929731,0.15212,0.14559,0.436282,1.044855
+Investigate,2,967.43,106,112.32,304867.64,932309.58,1.340556,1.1217,0.933519,0.205485,0.109568,0.116101,0.327003,0.943732
+Monitor,4,3789.48,241,232.4,717568.55,3056179.35,0.806704,0.817668,1.038711,0.050122,0.063597,0.061328,0.234793,1.037005
+No immediate action,6,7042.15,514,528.6,1634706.25,6157628.18,0.869384,0.848224,0.959826,0.04353,0.072989,0.075062,0.265477,0.97238

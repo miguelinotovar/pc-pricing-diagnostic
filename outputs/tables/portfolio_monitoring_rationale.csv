@@ -1,0 +1,5 @@
+warning_level,interpretation,recommended_use
+Escalate,"Reviewable segment with multiple strong warning signals, such as high frequency, high loss ratio pressure, or observed claims materially above expected.","Prioritize for pricing, underwriting, risk classification, or data quality review."
+Investigate,Reviewable segment with at least one material warning signal.,Investigate drivers before recommending rate action or rule changes.
+Monitor,Segment with moderate signal or limited credibility.,Track over time or aggregate with similar segments before acting.
+No immediate action,Segment is within the current monitoring range.,Include in recurring monitoring without immediate escalation.

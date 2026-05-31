@@ -16,6 +16,7 @@ PIPELINE_MODULES = [
     "pc_pricing_diagnostic.frequency_model",
     "pc_pricing_diagnostic.model_specification_comparison",
     "pc_pricing_diagnostic.frequency_model_diagnostics",
+    "pc_pricing_diagnostic.portfolio_monitoring",
     "pc_pricing_diagnostic.executive_visuals",
 ]
 
