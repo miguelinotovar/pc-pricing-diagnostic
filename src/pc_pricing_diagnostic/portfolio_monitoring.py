@@ -2,44 +2,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from pc_pricing_diagnostic.frequency_model import (
-    OUTPUT_EXCEL,
-    OUTPUT_TABLES,
-    ROOT,
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_TABLES
+from pc_pricing_diagnostic.io_utils import load_required_table, write_csv_outputs
+from pc_pricing_diagnostic.plot_style import (
+    GRID,
+    NAVY,
+    WARNING_COLORS,
+    apply_axis_style,
+    save_figure,
 )
 
 
-OUTPUT_FIGURES = ROOT / "outputs" / "figures"
 EXCEL_PATH = OUTPUT_EXCEL / "portfolio_monitoring_review.xlsx"
 
 SEGMENT_KEYS = ["territory", "driver_age_band"]
-
-NAVY = "#172033"
-BLUE = "#2f5f98"
-GREEN = "#5f8f72"
-ORANGE = "#c47f2c"
-RED = "#a94442"
-MUTED = "#5f6b7a"
-GRID = "#d9e2ec"
-
-WARNING_COLORS = {
-    "Escalate": RED,
-    "Investigate": ORANGE,
-    "Monitor": BLUE,
-    "No immediate action": GREEN,
-}
-
-
-def load_required_table(file_name: str) -> pd.DataFrame:
-    """
-    Load a required CSV table from outputs/tables.
-    """
-    path = OUTPUT_TABLES / file_name
-
-    if not path.exists():
-        raise FileNotFoundError(f"Required table not found: {path}")
-
-    return pd.read_csv(path)
 
 
 def create_segment_label(df: pd.DataFrame) -> pd.Series:
@@ -385,41 +361,6 @@ def round_monitoring_outputs(df: pd.DataFrame) -> pd.DataFrame:
     return output
 
 
-def apply_monitoring_axis_style(ax) -> None:
-    """
-    Apply a consistent style to monitoring charts.
-    """
-    ax.set_facecolor("white")
-    ax.grid(True, alpha=0.45, color=GRID, linewidth=0.7)
-    ax.set_axisbelow(True)
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_color(GRID)
-    ax.spines["bottom"].set_color(GRID)
-
-    ax.tick_params(axis="both", colors=NAVY, labelsize=8)
-    ax.xaxis.label.set_color(MUTED)
-    ax.yaxis.label.set_color(MUTED)
-    ax.xaxis.label.set_size(8)
-    ax.yaxis.label.set_size(8)
-
-
-def save_figure(fig, file_name: str) -> None:
-    """
-    Save a monitoring chart.
-    """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
-
-    fig.savefig(
-        OUTPUT_FIGURES / file_name,
-        dpi=220,
-        bbox_inches="tight",
-        facecolor="white",
-    )
-    plt.close(fig)
-
-
 def save_warning_matrix(watchlist: pd.DataFrame) -> None:
     """
     Save a frequency-index versus loss-ratio-index warning matrix.
@@ -448,7 +389,7 @@ def save_warning_matrix(watchlist: pd.DataFrame) -> None:
     ax.set_xlabel("Frequency index (portfolio average = 1.00)")
     ax.set_ylabel("Loss ratio index (portfolio average = 1.00)")
 
-    apply_monitoring_axis_style(ax)
+    apply_axis_style(ax)
 
     legend = ax.legend(
         loc="upper left",
@@ -503,7 +444,7 @@ def save_top_watchlist_chart(watchlist: pd.DataFrame, top_n: int = 12) -> None:
     ax.set_ylabel("")
     ax.set_xlim(0, max(chart_data["priority_score"].max() * 1.20, 0.10))
 
-    apply_monitoring_axis_style(ax)
+    apply_axis_style(ax)
     ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
     ax.grid(False, axis="y")
 
@@ -515,11 +456,8 @@ def write_outputs(outputs: dict[str, pd.DataFrame]) -> None:
     """
     Write monitoring outputs to CSV and Excel.
     """
-    OUTPUT_TABLES.mkdir(parents=True, exist_ok=True)
+    write_csv_outputs(outputs)
     OUTPUT_EXCEL.mkdir(parents=True, exist_ok=True)
-
-    for name, table in outputs.items():
-        table.to_csv(OUTPUT_TABLES / f"{name}.csv", index=False)
 
     with pd.ExcelWriter(EXCEL_PATH, engine="openpyxl") as writer:
         outputs["portfolio_monitoring_watchlist"].to_excel(

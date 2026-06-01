@@ -1,38 +1,20 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
-from pc_pricing_diagnostic.frequency_model import (
-    OUTPUT_EXCEL,
-    OUTPUT_TABLES,
-    ROOT,
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_TABLES
+from pc_pricing_diagnostic.io_utils import load_required_table
+from pc_pricing_diagnostic.plot_style import (
+    BAR_BLUE,
+    BLUE,
+    GREEN,
+    GRID,
+    NAVY,
+    apply_axis_style,
+    save_figure,
 )
 
 
-OUTPUT_FIGURES = ROOT / "outputs" / "figures"
 EXECUTIVE_EXCEL_PATH = OUTPUT_EXCEL / "executive_visual_pack.xlsx"
-
-NAVY = "#172033"
-BLUE = "#2f5f98"
-SOFT_BLUE = "#eef5fb"
-GREEN = "#5f8f72"
-MUTED = "#5f6b7a"
-GRID = "#d9e2ec"
-BAR_BLUE = "#2f80b7"
-
-
-def load_required_table(file_name: str) -> pd.DataFrame:
-    """
-    Load a required CSV table from outputs/tables.
-
-    Raise a clear error if the file does not exist.
-    """
-    path = OUTPUT_TABLES / file_name
-
-    if not path.exists():
-        raise FileNotFoundError(f"Required table not found: {path}")
-
-    return pd.read_csv(path)
 
 
 def prepare_segment_label(df: pd.DataFrame) -> pd.DataFrame:
@@ -66,42 +48,6 @@ def prettify_model_name(model_name: str) -> str:
     }
 
     return mapping.get(model_name, model_name)
-
-
-def apply_executive_axis_style(ax) -> None:
-    """
-    Apply a consistent visual style to executive charts.
-    """
-    ax.set_facecolor("white")
-    ax.grid(True, alpha=0.45, color=GRID, linewidth=0.7)
-    ax.set_axisbelow(True)
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_color(GRID)
-    ax.spines["bottom"].set_color(GRID)
-
-    ax.tick_params(axis="both", colors=NAVY, labelsize=8)
-
-    ax.xaxis.label.set_color(MUTED)
-    ax.yaxis.label.set_color(MUTED)
-    ax.xaxis.label.set_size(8)
-    ax.yaxis.label.set_size(8)
-
-
-def save_figure(fig, file_name: str) -> None:
-    """
-    Save an executive chart with consistent export settings.
-    """
-    OUTPUT_FIGURES.mkdir(parents=True, exist_ok=True)
-
-    fig.savefig(
-        OUTPUT_FIGURES / file_name,
-        dpi=220,
-        bbox_inches="tight",
-        facecolor="white",
-    )
-    plt.close(fig)
 
 
 def save_top_frequency_segments_chart(high_frequency_segments: pd.DataFrame) -> None:
@@ -145,7 +91,7 @@ def save_top_frequency_segments_chart(high_frequency_segments: pd.DataFrame) -> 
     ax.set_ylabel("")
     ax.set_xlim(0, max(chart_data["frequency_index"].max() * 1.15, 1.25))
 
-    apply_executive_axis_style(ax)
+    apply_axis_style(ax)
     ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
     ax.grid(False, axis="y")
 
@@ -194,7 +140,7 @@ def save_top_loss_ratio_segments_chart(high_frequency_segments: pd.DataFrame) ->
     ax.set_ylabel("")
     ax.set_xlim(0, max(chart_data["loss_ratio_index"].max() * 1.15, 1.25))
 
-    apply_executive_axis_style(ax)
+    apply_axis_style(ax)
     ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
     ax.grid(False, axis="y")
 
@@ -236,7 +182,7 @@ def save_calibration_chart(calibration_by_decile: pd.DataFrame) -> None:
     ax.set_ylabel("Claim frequency")
     ax.set_xticks(chart_data["risk_decile"])
 
-    apply_executive_axis_style(ax)
+    apply_axis_style(ax)
 
     legend = ax.legend(
         loc="upper left",
@@ -300,7 +246,7 @@ def save_model_specification_chart(
     ax.set_ylabel("")
     ax.set_xlim(0, max(chart_data["deviance_lift_pct"].max() * 1.25, 0.25))
 
-    apply_executive_axis_style(ax)
+    apply_axis_style(ax)
     ax.grid(True, axis="x", alpha=0.45, color=GRID, linewidth=0.7)
     ax.grid(False, axis="y")
 
