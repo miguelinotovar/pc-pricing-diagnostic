@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_TABLES
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL
 from pc_pricing_diagnostic.io_utils import load_required_table, write_csv_outputs
 from pc_pricing_diagnostic.plot_style import (
     GRID,
