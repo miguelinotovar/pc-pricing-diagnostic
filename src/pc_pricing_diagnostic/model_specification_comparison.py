@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from pc_pricing_diagnostic.frequency_model import (
+from pc_pricing_diagnostic.frequency_analysis import (
     MODEL_FORMULA as CATEGORICAL_FORMULA,
     NULL_FORMULA,
     OUTPUT_EXCEL,

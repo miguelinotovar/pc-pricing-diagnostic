@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm, poisson
 
-from pc_pricing_diagnostic.frequency_model import (
+from pc_pricing_diagnostic.frequency_analysis import (
     MODEL_FORMULA,
     ROOT,
     OUTPUT_EXCEL,

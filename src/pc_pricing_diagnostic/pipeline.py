@@ -6,7 +6,7 @@ import importlib
 PIPELINE_MODULES = [
     "pc_pricing_diagnostic.synthetic_data",
     "pc_pricing_diagnostic.experience_diagnostics",
-    "pc_pricing_diagnostic.frequency_model",
+    "pc_pricing_diagnostic.frequency_analysis",
     "pc_pricing_diagnostic.model_specification_comparison",
     "pc_pricing_diagnostic.frequency_model_diagnostics",
     "pc_pricing_diagnostic.portfolio_monitoring",
