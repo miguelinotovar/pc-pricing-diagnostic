@@ -350,7 +350,7 @@ def main() -> None:
         index=False,
     )
 
-    print("Executive visuals created:")
+    print("Executive reporting outputs created:")
     print("- outputs/figures/executive_top_frequency_segments.png")
     print("- outputs/figures/executive_top_loss_ratio_segments.png")
     print("- outputs/figures/executive_calibration_by_decile.png")
