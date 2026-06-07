@@ -1,11 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_TABLES
 from pc_pricing_diagnostic.frequency_analysis import (
-    MODEL_FORMULA as CATEGORICAL_FORMULA,
-    NULL_FORMULA,
-    OUTPUT_EXCEL,
-    OUTPUT_TABLES,
     compute_expected_claims,
     fit_poisson_glm,
     load_policy_data,
@@ -16,6 +13,18 @@ from pc_pricing_diagnostic.frequency_analysis import (
 
 
 EXCEL_PATH = OUTPUT_EXCEL / "frequency_model_specification_comparison.xlsx"
+
+
+NULL_FORMULA = "claim_count ~ 1"
+
+
+CATEGORICAL_FORMULA = (
+    'claim_count ~ '
+    'C(territory, Treatment(reference="Rural")) + '
+    'C(driver_age_band, Treatment(reference="40-64")) + '
+    'C(vehicle_age_band, Treatment(reference="4-7")) + '
+    'C(vehicle_type, Treatment(reference="Sedan"))'
+)
 
 
 CONTINUOUS_LINEAR_FORMULA = (

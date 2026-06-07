@@ -6,12 +6,10 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 from sklearn.model_selection import train_test_split
 
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_TABLES, PROCESSED_DATA
 
-ROOT = Path(__file__).resolve().parents[2]
 
-DATA_PATH = ROOT / "data" / "processed" / "synthetic_policy_data.csv"
-OUTPUT_TABLES = ROOT / "outputs" / "tables"
-OUTPUT_EXCEL = ROOT / "outputs" / "excel"
+DATA_PATH = PROCESSED_DATA / "synthetic_policy_data.csv"
 
 
 MODEL_FORMULA = (

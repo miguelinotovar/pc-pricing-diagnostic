@@ -1,15 +1,11 @@
-from pathlib import Path
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.stats import norm, poisson
 
+from pc_pricing_diagnostic.config import OUTPUT_EXCEL, OUTPUT_FIGURES, OUTPUT_TABLES
 from pc_pricing_diagnostic.frequency_analysis import (
     MODEL_FORMULA,
-    ROOT,
-    OUTPUT_EXCEL,
-    OUTPUT_TABLES,
     compute_expected_claims,
     fit_poisson_glm,
     load_policy_data,
@@ -18,7 +14,6 @@ from pc_pricing_diagnostic.frequency_analysis import (
 )
 
 
-OUTPUT_FIGURES = ROOT / "outputs" / "figures"
 EXCEL_PATH = OUTPUT_EXCEL / "frequency_model_diagnostics.xlsx"
 
 
