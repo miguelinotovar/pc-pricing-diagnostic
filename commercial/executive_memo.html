@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P&C Pricing Diagnostic Executive Memo</title>
+    <title>P&C Portfolio Monitoring Executive Memo</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -13,28 +13,29 @@
         <header class="brand-bar">
             <div>
                 <p class="brand-name">Miguel Tovar Actuarial Analytics</p>
-                <p class="brand-subtitle">P&C Pricing Diagnostic</p>
+                <p class="brand-subtitle">P&C Portfolio Monitoring</p>
             </div>
-            <p class="brand-note">Synthetic sample · Executive memo preview</p>
+            <p class="brand-note">Synthetic sample · Monitoring memo preview</p>
         </header>
 
         <section class="hero memo-hero">
             <div>
                 <p class="eyebrow">Executive memo</p>
-                <h1>P&C Pricing Diagnostic</h1>
+                <h1>P&C Portfolio Monitoring</h1>
                 <p class="hero-text">
-                    This memo summarizes a synthetic P&C pricing diagnostic designed to help
-                    insurance teams identify pricing, underwriting, risk classification, and
-                    data quality review priorities before committing to a full pricing review.
+                    This memo summarizes a synthetic P&C portfolio monitoring workflow designed
+                    to help insurance teams identify escalation, investigation, monitoring,
+                    pricing, underwriting, and data quality review priorities before committing
+                    to deeper pricing work.
                 </p>
             </div>
 
             <div class="hero-card">
                 <p class="card-label">Purpose</p>
                 <p>
-                    Translate model outputs and portfolio diagnostics into a short list of
-                    review priorities that can be discussed by pricing, underwriting, and
-                    analytics teams.
+                    Translate portfolio diagnostics, model outputs, and observed-versus-expected
+                    signals into a short list of review priorities that can be discussed by
+                    pricing, underwriting, and analytics teams.
                 </p>
             </div>
         </section>
@@ -42,39 +43,39 @@
         <section class="memo-section">
             <h2>1. Executive summary</h2>
             <p>
-                The diagnostic reviews claim frequency, loss ratio pressure, benchmark
-                model calibration, and observed-versus-expected claim behavior across
-                portfolio segments.
+                The workflow reviews claim frequency, loss ratio pressure, benchmark model
+                calibration, observed-versus-expected claim behavior, and monitoring signals
+                across portfolio segments.
             </p>
             <p>
                 The objective is not to produce final rate indications. The objective is to
-                identify where deeper pricing or underwriting work is most likely to create
-                value.
+                identify which segments should be escalated, investigated, monitored, or left
+                without immediate action.
             </p>
         </section>
 
         <section class="grid three-columns">
             <div class="mini-card strong">
-                <h3>Primary signal</h3>
+                <h3>Monitoring signal</h3>
                 <p>
-                    Segment-level frequency and loss ratio indices identify areas that may be
-                    performing worse than the portfolio average.
+                    Segment-level frequency, loss ratio, and O/E signals identify areas that may
+                    require escalation or recurring monitoring.
                 </p>
             </div>
 
             <div class="mini-card">
                 <h3>Model support</h3>
                 <p>
-                    A benchmark Poisson frequency GLM supports expected claim estimates and
-                    observed-versus-expected diagnostics.
+                    A benchmark Poisson frequency GLM supports expected claim estimates,
+                    observed-versus-expected diagnostics, and calibration review.
                 </p>
             </div>
 
             <div class="mini-card">
                 <h3>Decision use</h3>
                 <p>
-                    Findings are organized into review priorities, not automatic pricing
-                    actions.
+                    Findings are organized into escalation, investigation, and monitoring
+                    priorities, not automatic pricing actions.
                 </p>
             </div>
         </section>
@@ -92,13 +93,13 @@
                     <li>Observed-versus-expected claims</li>
                     <li>Calibration by expected-risk decile</li>
                     <li>Model specification comparison</li>
-                    <li>Executive visual outputs</li>
+                    <li>Monitoring and executive visual outputs</li>
                 </ul>
             </div>
         </section>
 
         <section class="memo-section production-use">
-            <h2>How this diagnostic is used in practice</h2>
+            <h2>How this monitoring workflow is used in practice</h2>
 
             <div class="priority-grid">
                 <div>
@@ -110,18 +111,18 @@
                 </div>
 
                 <div>
-                    <h3>Prioritize review areas</h3>
+                    <h3>Prioritize monitoring actions</h3>
                     <p>
-                        Identify where pricing, underwriting, risk classification, or data quality
-                        review is most likely to matter.
+                        Identify which segments should be escalated, investigated, monitored, or
+                        reviewed for data quality issues.
                     </p>
                 </div>
 
                 <div>
                     <h3>Decide the next level of work</h3>
                     <p>
-                        Determine whether deeper modeling, monitoring, or pricing action is
-                        justified.
+                        Determine whether deeper modeling, pricing, underwriting, or monitoring
+                        work is justified.
                     </p>
                 </div>
             </div>
@@ -132,44 +133,43 @@
         <header class="brand-bar">
             <div>
                 <p class="brand-name">Miguel Tovar Actuarial Analytics</p>
-                <p class="brand-subtitle">P&C Pricing Diagnostic</p>
+                <p class="brand-subtitle">P&C Portfolio Monitoring</p>
             </div>
             <p class="brand-note">Key findings and next steps</p>
         </header>
 
         <section class="grid memo-finding-grid">
             <div class="memo-section memo-finding-card">
-                <h2>3. Elevated frequency segments</h2>
+                <h2>3. Portfolio warning matrix</h2>
                 <p>
-                    The frequency index compares each segment's observed claim frequency
-                    against the portfolio average. Values above 1.00 indicate higher frequency
-                    than the portfolio average.
+                    The warning matrix combines technical pressure and warning level so the
+                    highest-priority portfolio segments can be reviewed first.
                 </p>
 
                 <div class="memo-visual compact-visual">
-                    <img src="../outputs/figures/executive_top_frequency_segments.png"
-                        alt="Top segments by frequency index" />
+                    <img src="../outputs/figures/portfolio_warning_matrix.png"
+                        alt="Portfolio warning matrix by segment" />
                 </div>
             </div>
 
             <div class="memo-section memo-finding-card">
-                <h2>4. Loss ratio pressure</h2>
+                <h2>4. Top monitoring priorities</h2>
                 <p>
-                    The loss ratio index compares each segment's loss ratio against the total
-                    portfolio loss ratio. Values above 1.00 indicate worse loss ratio performance
-                    than the portfolio average.
+                    The monitoring watchlist ranks segments using adverse frequency, loss ratio,
+                    O/E, credibility, and volume signals. The purpose is structured escalation,
+                    not automatic repricing.
                 </p>
 
                 <div class="memo-visual compact-visual">
-                    <img src="../outputs/figures/executive_top_loss_ratio_segments.png"
-                        alt="Top segments by loss ratio index" />
+                    <img src="../outputs/figures/portfolio_monitoring_top_priorities.png"
+                        alt="Top portfolio monitoring priorities" />
                 </div>
             </div>
         </section>
 
         <section class="grid memo-lower-grid">
             <div class="memo-section memo-validation-card">
-                <h2>5. Model validation note</h2>
+                <h2>5. Model support and validation note</h2>
                 <p>
                     Policies are sorted by model-expected frequency and grouped into ten
                     equally sized risk deciles. Higher deciles should generally show higher
@@ -186,9 +186,9 @@
                 <h2>6. Recommended next steps</h2>
                 <ul>
                     <li>Validate exposure, premium, claims, and underwriting fields.</li>
-                    <li>Review high-frequency and high-loss-ratio segments.</li>
-                    <li>Separate frequency and severity drivers.</li>
-                    <li>Identify 3–5 pricing, underwriting, or risk classification priorities.</li>
+                    <li>Review escalated and investigation-level segments.</li>
+                    <li>Separate frequency, severity, premium adequacy, and data quality drivers.</li>
+                    <li>Identify 3–5 escalation, investigation, or monitoring priorities.</li>
                     <li>Decide whether deeper modeling or monitoring is justified.</li>
                 </ul>
 
@@ -207,29 +207,29 @@
             <p>
                 These findings are prioritization signals. They should not be interpreted as
                 automatic rate changes without reviewing credibility, underwriting context,
-                severity contribution, data quality, and business constraints. This commercial
-                sample uses synthetic data and demonstrates workflow structure, not final
-                actuarial pricing advice.
+                severity contribution, premium adequacy, data quality, and business constraints.
+                This commercial sample uses synthetic data and demonstrates workflow structure,
+                not final actuarial pricing advice.
             </p>
         </section>
 
         <section class="memo-section priority-output">
-            <h2>What the diagnostic produces</h2>
+            <h2>What the monitoring workflow produces</h2>
 
             <div class="priority-grid">
                 <div>
-                    <h3>Pricing review priorities</h3>
+                    <h3>Escalation priorities</h3>
                     <p>
-                        Segments with elevated frequency, loss ratio pressure, or observed-versus-expected
-                        deterioration.
+                        Segments with adverse frequency, loss ratio pressure, or observed-versus-expected
+                        deterioration requiring prompt review.
                     </p>
                 </div>
 
                 <div>
-                    <h3>Underwriting review priorities</h3>
+                    <h3>Investigation priorities</h3>
                     <p>
-                        Risk classifications, eligibility rules, coverage terms, or segment definitions
-                        that may deserve closer review.
+                        Risk classifications, eligibility rules, coverage terms, segment definitions, or
+                        data fields that may deserve closer review.
                     </p>
                 </div>
 
@@ -237,7 +237,7 @@
                     <h3>Monitoring priorities</h3>
                     <p>
                         Segments, fields, or model diagnostics that should be tracked before deeper
-                        pricing work is approved.
+                        pricing or underwriting work is approved.
                     </p>
                 </div>
             </div>
