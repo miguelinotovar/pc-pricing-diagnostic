@@ -1,28 +1,60 @@
 # P&C Portfolio Monitoring & Pricing Diagnostic
 
-This repository is a reproducible actuarial analytics workflow for a synthetic personal auto portfolio.
+A reproducible actuarial analytics workflow for a synthetic personal auto insurance portfolio.
 
-It demonstrates how to move from raw policy-period data to portfolio diagnostics, frequency modeling, monitoring signals, and executive reporting. The workflow is designed to show practical actuarial support capabilities for pricing, underwriting, portfolio review, and remote analytics work.
+The project demonstrates how policy-level data can be converted into portfolio experience diagnostics, frequency model support, observed-versus-expected review, monitoring signals, Excel review packs, and executive-facing reporting.
 
-The project is not intended to provide insurance advice or production-ready pricing recommendations. It is a technical portfolio project built with synthetic data.
+The main business use case is **portfolio monitoring and early warning**: identifying which segments should be escalated, investigated, monitored, or left without immediate action before committing to a full pricing or underwriting review.
+
+This is a technical portfolio project built with synthetic data. It is not insurance advice, a production pricing model, or a final actuarial rate indication.
+
+## Commercial sample
+
+The project includes business-facing materials that translate the technical workflow into reviewable outputs:
+
+* [Portfolio Monitoring One-Pager](commercial/pc_pricing_diagnostic_one_pager.pdf)
+* [Executive Memo](commercial/pc_pricing_diagnostic_executive_memo.pdf)
+
+HTML versions are also available in `commercial/`.
 
 ## What this project demonstrates
 
-The workflow shows how to:
+This repository is intended to show practical remote actuarial analytics support capabilities, including:
 
-* generate a synthetic P&C insurance portfolio;
-* review portfolio experience by segment;
-* analyze frequency, loss ratio, pure premium, and observed-to-expected behavior;
-* fit and compare Poisson frequency models with exposure offsets;
-* evaluate model calibration and residual diagnostics;
-* convert technical signals into a portfolio monitoring watchlist;
-* produce executive-ready tables, charts, Excel packs, and commercial materials.
+* synthetic P&C policy-level data generation;
+* portfolio experience review by segment;
+* frequency, loss ratio, pure premium, and observed-versus-expected diagnostics;
+* benchmark Poisson frequency modeling with exposure offsets;
+* model specification comparison and calibration checks;
+* residual diagnostics and model review exhibits;
+* portfolio monitoring watchlist construction;
+* Excel review packs, chart outputs, and executive reporting materials.
 
-The strongest business use case is portfolio monitoring and early warning: identifying which segments should be escalated, investigated, monitored, or left without immediate action.
+The broader value is not the pricing model alone. The value is the full workflow:
+
+```text
+visible technical output
++ reproducible analytics process
++ business interpretation
++ remote actuarial support
+```
+
+## Remote actuarial support use cases
+
+The workflow is designed to resemble delegated analytics work that could support a pricing, underwriting, actuarial, MGA, program business, or insurance analytics team.
+
+Examples of support this project is meant to demonstrate:
+
+* preparing recurring portfolio monitoring exhibits;
+* identifying high-frequency, high-loss-ratio, or adverse O/E segments;
+* producing Excel review packs for pricing or underwriting discussion;
+* organizing model diagnostics into business-readable outputs;
+* translating technical signals into escalation, investigation, and monitoring priorities;
+* preparing executive summaries from actuarial analytics workflows.
 
 ## Workflow
 
-The pipeline follows this sequence:
+The full pipeline follows this sequence:
 
 ```text
 Synthetic data
@@ -32,7 +64,7 @@ Synthetic data
 → Executive reporting
 ```
 
-Run the full pipeline from the repository root:
+Run the full workflow from the repository root:
 
 ```bash
 PYTHONPATH=src python -m pc_pricing_diagnostic.pipeline
@@ -43,14 +75,13 @@ PYTHONPATH=src python -m pc_pricing_diagnostic.pipeline
 ```text
 pc-pricing-diagnostic/
 ├── commercial/
-│   ├── executive_memo.html
 │   ├── one_pager.html
-│   ├── pc_pricing_diagnostic_executive_memo.pdf
+│   ├── executive_memo.html
 │   ├── pc_pricing_diagnostic_one_pager.pdf
+│   ├── pc_pricing_diagnostic_executive_memo.pdf
 │   └── styles.css
 ├── data/
 │   ├── raw/
-│   │   └── README.md
 │   └── processed/
 ├── outputs/
 │   ├── excel/
@@ -58,28 +89,25 @@ pc-pricing-diagnostic/
 │   └── tables/
 ├── src/
 │   └── pc_pricing_diagnostic/
-│       ├── __init__.py
-│       ├── config.py
-│       ├── executive_reporting.py
+│       ├── synthetic_data.py
 │       ├── experience_diagnostics.py
 │       ├── frequency_analysis.py
-│       ├── io_utils.py
-│       ├── pipeline.py
-│       ├── plot_style.py
 │       ├── portfolio_monitoring.py
-│       └── synthetic_data.py
+│       ├── executive_reporting.py
+│       ├── pipeline.py
+│       ├── config.py
+│       ├── io_utils.py
+│       └── plot_style.py
 ├── README.md
 ├── requirements.txt
 └── pyproject.toml
 ```
 
-## Business modules
+## Core modules
 
 ### `synthetic_data.py`
 
 Generates the synthetic personal auto portfolio used throughout the project.
-
-The output includes policy-period records with exposure, claim count, earned premium, total claim amount, territory, driver age, vehicle age, vehicle type, and derived rating bands.
 
 Main outputs:
 
@@ -92,16 +120,9 @@ outputs/tables/synthetic_portfolio_summary.csv
 
 Creates the first layer of portfolio review before modeling.
 
-It produces:
+It produces portfolio-level summaries, segment experience tables, frequency indices, loss ratio indices, pure premium diagnostics, and exploratory frequency exhibits.
 
-* portfolio-level overview;
-* segment experience tables;
-* frequency and loss ratio indices;
-* high-frequency segment review;
-* exploratory diagnostics by driver age, vehicle age, territory, and vehicle type;
-* modeling rationale for benchmark rating variables.
-
-Main outputs:
+Main outputs include:
 
 ```text
 outputs/tables/portfolio_overview.csv
@@ -109,13 +130,6 @@ outputs/tables/segment_experience_by_territory_age.csv
 outputs/tables/segment_experience_by_vehicle_age.csv
 outputs/tables/segment_experience_by_territory_vehicle.csv
 outputs/tables/high_frequency_segments.csv
-outputs/tables/eda_frequency_by_driver_age.csv
-outputs/tables/eda_frequency_by_driver_age_band.csv
-outputs/tables/eda_frequency_by_vehicle_age.csv
-outputs/tables/eda_frequency_by_vehicle_age_band.csv
-outputs/tables/eda_frequency_by_territory.csv
-outputs/tables/eda_frequency_by_vehicle_type.csv
-outputs/tables/eda_modeling_rationale.csv
 outputs/excel/experience_review.xlsx
 outputs/excel/exploratory_frequency_review.xlsx
 ```
@@ -124,20 +138,9 @@ outputs/excel/exploratory_frequency_review.xlsx
 
 Consolidates the actuarial frequency modeling workflow.
 
-It includes:
+It includes a benchmark Poisson GLM with log exposure offset, model comparison, observed-versus-expected claim diagnostics, calibration by expected-risk decile, residual diagnostics, and model specification comparison.
 
-* Poisson GLM with log exposure offset;
-* null model comparison;
-* benchmark categorical frequency model;
-* observed-to-expected tables by segment;
-* model specification comparison;
-* out-of-sample mean Poisson deviance ranking;
-* calibration by expected-risk decile;
-* residual diagnostics;
-* randomized quantile residuals;
-* diagnostic rationale.
-
-Main outputs:
+Main outputs include:
 
 ```text
 outputs/tables/frequency_model_comparison.csv
@@ -145,13 +148,8 @@ outputs/tables/frequency_model_coefficients.csv
 outputs/tables/frequency_oe_by_territory_age.csv
 outputs/tables/frequency_oe_by_territory_vehicle.csv
 outputs/tables/frequency_oe_by_vehicle_age.csv
-outputs/tables/frequency_model_specification_comparison.csv
-outputs/tables/frequency_model_specification_ranking.csv
-outputs/tables/frequency_model_specification_rationale.csv
 outputs/tables/frequency_model_diagnostics_summary.csv
 outputs/tables/frequency_model_calibration_by_decile.csv
-outputs/tables/frequency_model_top_residuals.csv
-outputs/tables/frequency_model_diagnostics_rationale.csv
 outputs/excel/frequency_model_review.xlsx
 outputs/excel/frequency_model_specification_comparison.xlsx
 outputs/excel/frequency_model_diagnostics.xlsx
@@ -161,7 +159,9 @@ outputs/excel/frequency_model_diagnostics.xlsx
 
 Creates the portfolio monitoring and early-warning layer.
 
-This module translates technical signals into an actionable watchlist. Segments are classified into:
+This module combines experience diagnostics, observed-versus-expected results, credibility/volume signals, and technical pressure indicators into a monitoring watchlist.
+
+Segments are classified into:
 
 ```text
 Escalate
@@ -169,8 +169,6 @@ Investigate
 Monitor
 No immediate action
 ```
-
-The watchlist is designed to support recurring portfolio review, pricing discussion, underwriting review, and remote actuarial analytics support.
 
 Main outputs:
 
@@ -187,7 +185,7 @@ outputs/figures/portfolio_monitoring_top_priorities.png
 
 Produces executive-oriented visual outputs and an Excel visual pack.
 
-These outputs are intended to support commercial reporting, portfolio review conversations, and client-facing summaries.
+These outputs support portfolio review conversations, model review discussions, and business-facing summaries.
 
 Main outputs:
 
@@ -200,63 +198,49 @@ outputs/tables/executive_visual_inventory.csv
 outputs/excel/executive_visual_pack.xlsx
 ```
 
-## Support modules
+## Technical notes
 
-### `pipeline.py`
+The frequency modeling component uses a Poisson GLM with exposure offsets to estimate expected claim counts. Observed-versus-expected ratios are used as diagnostic signals, not as standalone pricing recommendations.
 
-Runs the full workflow in sequence.
+The monitoring layer combines multiple signals:
+
+* observed claim frequency;
+* loss ratio pressure;
+* frequency index;
+* loss ratio index;
+* observed-versus-expected claim behavior;
+* segment volume and credibility indicators.
+
+The output is a prioritization framework for review, not an automatic pricing action.
+
+## Installation
+
+Create and activate a Python environment, then install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the pipeline:
 
 ```bash
 PYTHONPATH=src python -m pc_pricing_diagnostic.pipeline
 ```
 
-### `config.py`
+## Key outputs
 
-Centralizes repository paths for data, outputs, figures, Excel files, and commercial materials.
+The project produces three main types of outputs:
 
-### `io_utils.py`
-
-Provides reusable input/output helpers for reading required tables and writing CSV outputs.
-
-### `plot_style.py`
-
-Centralizes chart styling, color palette, warning-level colors, axis formatting, and figure export settings.
-
-## Commercial materials
+```text
+outputs/tables/   CSV tables for review and auditability
+outputs/excel/    Excel review packs for business users
+outputs/figures/  Charts for reporting and executive summaries
+```
 
 The commercial materials are stored in:
 
 ```text
 commercial/
-```
-
-Current files include:
-
-```text
-commercial/one_pager.html
-commercial/executive_memo.html
-commercial/pc_pricing_diagnostic_one_pager.pdf
-commercial/pc_pricing_diagnostic_executive_memo.pdf
-commercial/styles.css
-```
-
-These materials should be read as portfolio artifacts, not production insurance advice. They demonstrate how the technical workflow can be translated into business-facing reporting.
-
-## Current positioning
-
-The project is best described as:
-
-```text
-P&C Portfolio Monitoring & Pricing Diagnostic
-```
-
-The pricing model is one technical component. The broader value is the full analytics workflow:
-
-```text
-visible technical output
-+ reproducible analytics workflow
-+ business interpretation
-+ remote actuarial support
 ```
 
 ## Intended audience
