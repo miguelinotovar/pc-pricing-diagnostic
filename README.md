@@ -12,8 +12,8 @@ This is a technical portfolio project built with synthetic data. It is not insur
 
 The project includes business-facing materials that translate the technical workflow into reviewable outputs:
 
-* [Portfolio Monitoring One-Pager](commercial/pc_pricing_diagnostic_one_pager.pdf)
-* [Executive Memo](commercial/pc_pricing_diagnostic_executive_memo.pdf)
+* [Portfolio Monitoring One-Pager](commercial/pc_portfolio_monitoring_one_pager.pdf)
+* [Executive Memo](commercial/pc_portfolio_monitoring_executive_memo.pdf)
 
 HTML versions are also available in `commercial/`.
 
@@ -77,8 +77,8 @@ pc-pricing-diagnostic/
 ├── commercial/
 │   ├── one_pager.html
 │   ├── executive_memo.html
-│   ├── pc_pricing_diagnostic_one_pager.pdf
-│   ├── pc_pricing_diagnostic_executive_memo.pdf
+│   ├── pc_portfolio_monitoring_one_pager.pdf
+│   ├── pc_portfolio_monitoring_executive_memo.pdf
 │   └── styles.css
 ├── data/
 │   ├── raw/
